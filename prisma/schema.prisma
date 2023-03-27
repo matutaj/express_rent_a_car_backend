@@ -29,6 +29,31 @@ model Cliente {
 
   Reserva Reserva[]
   Login Login?
+  Contato Contato[]
+}
+
+model Contato{
+  id String @id @default(uuid())
+  contacto String
+  tipoContactoId String
+  clienteId String?
+  empresaId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  TipoContato TipoContato @relation(fields: [tipoContactoId], references: [id])
+  Cliente Cliente? @relation(fields: [clienteId], references: [id])
+  Empresa Empresa? @relation(fields: [empresaId], references: [id])
+}
+model TipoContato{
+  id String @id @default(uuid())
+  descricao String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  Contato Contato[]
+
 }
 
 model Empresa{
@@ -37,16 +62,15 @@ model Empresa{
   imagemUrl String?
   nif String
   quantidadeCar Int
-  telefone String
-  telefone2 String?
   descricao String?
-  
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   Carro  Carro[]
   Login Login?
+  Contato Contato[]
+
   
 }
 
