@@ -20,9 +20,9 @@ class TipoContatoRepositorio implements ITipoContato {
     descricao: string
   ): Promise<TipoContato | undefined> {
     const listarUm =
-      (await prisma.tipoContato.findUnique({ where: { descricao } })) ||
-      undefined;
-    undefined;
+      (await prisma.tipoContato.findFirst({
+        where: { descricao: descricao },
+      })) || undefined;
 
     return listarUm;
   }

@@ -1,6 +1,7 @@
 import { Cliente } from "@prisma/client";
 import { ClienteRepositorio } from "../../repositorio/Implementacao/ClienteRepository";
 import { TCriar } from "../../repositorio/ICliente";
+import { AppError } from "../../../../errors/AppError";
 
 class CriarClienteUseCase {
   async execute({
@@ -15,7 +16,7 @@ class CriarClienteUseCase {
     const ExistNumenroBI = await repositorio.pegarPeloBI(numeroBI);
 
     if (ExistNumenroBI)
-      throw new Error("Já existe alguém com esse número de BI!");
+      throw new AppError("Já existe alguém com esse número de BI!");
 
     const result = await repositorio.criar({
       nome,
