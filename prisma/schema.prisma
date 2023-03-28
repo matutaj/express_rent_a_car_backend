@@ -10,19 +10,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
-enum Motorista{
+enum Motorista {
   Sim
-  Nao 
+  Nao
 }
 
 model Cliente {
-  id   String @id @default(uuid())
-  nome String 
+  id        String  @id @default(uuid())
+  nome      String
   imagemUrl String?
-  telefone String
-  numeroBI String @unique
-  telefone2 String?
+  numeroBI  String  @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -56,81 +53,80 @@ model TipoContato{
 
 }
 
-model Empresa{
-  id String @id @default(uuid())
-  nome String
-  imagemUrl String?
-  nif String
+model Empresa {
+  id            String  @id @default(uuid())
+  nome          String
+  imagemUrl     String?
+  nif           String
   quantidadeCar Int
   descricao String?
+  descricao     String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Carro  Carro[]
+  Carro Carro[]
   Login Login?
   Contato Contato[]
 
-  
 }
 
-model Carro{
-  id String @id @default(uuid())
-  nome String
-  modelo String
-  imagemUrl String?
+model Carro {
+  id           String   @id @default(uuid())
+  nome         String
+  modelo       String
+  imagemUrl    String?
   valorAluguel Decimal
-  caucao Decimal?
-  fraquia Decimal?
-  empresaId String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  caucao       Decimal?
+  fraquia      Decimal?
+  empresaId    String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  Empresa  Empresa @relation(fields: [empresaId], references: [id])
+  Empresa Empresa @relation(fields: [empresaId], references: [id])
 
   Reserva Reserva[]
 }
 
-model Reserva{
-  id String @id @default(uuid())
-  clienteId String
-  carroId String
-  dataEntrga DateTime
-  dataDevolucao DateTime
+model Reserva {
+  id              String    @id @default(uuid())
+  clienteId       String
+  carroId         String
+  dataEntrga      DateTime
+  dataDevolucao   DateTime
   comprovativoUrl String
-  nomeAuroporto String?
-  nAviao String?
-  nAcento String?
-  motorista Motorista @default(Nao)
-  nomeHotel String?
-  nQuarto Int?
+  nomeAuroporto   String?
+  nAviao          String?
+  nAcento         String?
+  motorista       Motorista @default(Nao)
+  nomeHotel       String?
+  nQuarto         Int?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-Carro Carro @relation(fields: [carroId], references: [id])
-Cliente Cliente @relation(fields: [clienteId], references: [id])
-
+  Carro   Carro   @relation(fields: [carroId], references: [id])
+  Cliente Cliente @relation(fields: [clienteId], references: [id])
 }
 
-model Login{
-  email String @unique
-  clientId String? @unique
-  empresaId String? @unique
-  password String
+model Login {
+  email            String  @unique
+  clientId         String? @unique
+  empresaId        String? @unique
+  password         String
   passwordTokenSet String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   Cliente Cliente? @relation(fields: [clientId], references: [id])
-  Empresa Empresa? @relation(fields: [empresaId],references: [id])
+  Empresa Empresa? @relation(fields: [empresaId], references: [id])
 
   @@id([email])
 }
 
-model Provincia{
-  id String @id @default(uuid())
+model Provincia {
+  id   String @id @default(uuid())
   nome String
 
   createdAt DateTime @default(now())
@@ -138,9 +134,10 @@ model Provincia{
 
   Municipio Municipio[]
 }
-model Municipio{
-  id String @id @default(uuid())
-  nome String
+
+model Municipio {
+  id          String @id @default(uuid())
+  nome        String
   provinciaId String
 
   createdAt DateTime @default(now())
@@ -151,17 +148,15 @@ model Municipio{
   Distrito Distrito[]
 }
 
-model Distrito{
-  id String @id @default(uuid())
-  nome String
-  bairro String
-  rua String?
+model Distrito {
+  id          String  @id @default(uuid())
+  nome        String
+  bairro      String
+  rua         String?
   municipioId String
-
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   Municipio Municipio @relation(fields: [municipioId], references: [id])
-
 }
