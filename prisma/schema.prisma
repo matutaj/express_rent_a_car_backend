@@ -20,9 +20,7 @@ model Cliente {
   id   String @id @default(uuid())
   nome String 
   imagemUrl String?
-  telefone String
   numeroBI String @unique
-  telefone2 String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

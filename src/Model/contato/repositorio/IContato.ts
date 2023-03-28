@@ -18,7 +18,8 @@ export interface IContato {
   listarEmprasaId(id: string): Promise<Empresa | undefined>;
   listarClienteId(id: string): Promise<Cliente | undefined>;
   listarTipoContato(id: string): Promise<TipoContato | undefined>;
-  listarContato(designacao: string): Promise<Contato | undefined>;
+  listarContato(contacto: string): Promise<Contato | undefined>;
+  listarContatoPorDono(designacao: string): Promise<Contato | undefined>;
   apagar(id: string): Promise<void>;
   atualizar({}: IAtualizar): Promise<Contato>;
 }

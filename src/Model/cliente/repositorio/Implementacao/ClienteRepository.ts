@@ -3,20 +3,12 @@ import { prisma } from "../../../../prisma/client";
 import { Atulizar, ICliente, TCriar } from "../ICliente";
 
 class ClienteRepositorio implements ICliente {
-  async criar({
-    nome,
-    numeroBI,
-    imagemUrl,
-    telefone,
-    telefone2,
-  }: TCriar): Promise<Cliente> {
+  async criar({ nome, numeroBI, imagemUrl }: TCriar): Promise<Cliente> {
     const cirarCliente = await prisma.cliente.create({
       data: {
         nome,
         numeroBI,
         imagemUrl,
-        telefone,
-        telefone2,
       },
     });
 
@@ -55,14 +47,12 @@ class ClienteRepositorio implements ICliente {
   async atualizar({
     id,
     nome,
-    telefone,
     numeroBI,
     imagemUrl,
-    telefone2,
   }: Atulizar): Promise<Cliente> {
     const atualizando = await prisma.cliente.update({
       where: { id },
-      data: { nome, telefone, numeroBI, imagemUrl, telefone2 },
+      data: { nome, numeroBI, imagemUrl },
     });
     return atualizando;
   }
