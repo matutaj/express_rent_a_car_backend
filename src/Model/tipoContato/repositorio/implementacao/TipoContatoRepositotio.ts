@@ -15,7 +15,11 @@ class TipoContatoRepositorio implements ITipoContato {
 
     return listarTodo;
   }
-
+  async listarTipoContatoId(id: string): Promise<TipoContato | undefined> {
+    const listarId =
+      (await prisma.tipoContato.findUnique({ where: { id } })) || undefined;
+    return listarId;
+  }
   async listarUmTipoContato(
     descricao: string
   ): Promise<TipoContato | undefined> {
