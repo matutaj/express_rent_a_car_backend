@@ -8,6 +8,7 @@ export interface IAtualizar {
 export interface ITipoContato {
   criar(descricao: string): Promise<TipoContato>;
   listarUmTipoContato(descricao: string): Promise<TipoContato | undefined>;
+  listarTipoContatoId(id: string): Promise<TipoContato | undefined>;
   listarTipoContato(): Promise<TipoContato[]>;
   apagar(id: string): Promise<void>;
   atualizar({}: IAtualizar): Promise<TipoContato>;

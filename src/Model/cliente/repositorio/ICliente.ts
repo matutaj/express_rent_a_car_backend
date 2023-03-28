@@ -2,19 +2,15 @@ import { Cliente } from "@prisma/client";
 
 export interface TCriar {
   nome: string;
-  telefone: string;
   numeroBI: string;
   imagemUrl?: string;
-  telefone2?: string;
 }
 
 export interface Atulizar {
   id: string;
   nome: string;
-  telefone: string;
   numeroBI: string;
   imagemUrl?: string;
-  telefone2?: string;
 }
 
 export interface ICliente {
