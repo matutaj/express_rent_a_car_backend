@@ -4,13 +4,14 @@ import { criarClienteSchema } from "../../../../schemas/cliente";
 import { CriarClienteUseCase } from "./criarClienteUseCase";
 
 class CriarClienteController {
-  async clienteController(req: Request, res: Response) {
+  async handle(req: Request, res: Response) {
     const criarCliente = new CriarClienteUseCase();
 
     if (!(await criarClienteSchema.isValid(req.body)))
-      throw new AppError("Erro ao preencher os dados!");
+      throw new AppError("Preencha Os Dados Necessários ", 400);
 
     const result = await criarCliente.execute(req.body);
+
     return res.status(200).json(result);
   }
 }
