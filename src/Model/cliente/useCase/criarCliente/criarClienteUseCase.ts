@@ -5,7 +5,7 @@ import { ContatoRpositorio } from "../../../contato/repositorio/Implementacao/Co
 import { TipoContatoRepositorio } from "../../../tipoContato/repositorio/implementacao/TipoContatoRepositotio";
 
 export interface IContato {
-  contato: string;
+  contacto: string;
   tipoContactoId: string;
 }
 export interface TipoCliente {
@@ -14,13 +14,13 @@ export interface TipoCliente {
   imagemUrl?: string;
 }
 export interface ITodo {
-  iContato: IContato[];
-  tipo: TipoCliente;
+  contatoCliente: IContato[];
+  cliente: TipoCliente;
 }
 class CriarClienteUseCase {
   async execute({
-    tipo: { nome, numeroBI, imagemUrl },
-    iContato,
+    cliente: { nome, numeroBI, imagemUrl },
+    contatoCliente,
   }: ITodo): Promise<Cliente> {
     const repositorio = new ClienteRepositorio();
     const repositorioContato = new ContatoRpositorio();
@@ -32,28 +32,41 @@ class CriarClienteUseCase {
       throw new AppError("Já existe alguém com esse número de BI!");
 
     await Promise.all(
-      iContato.map(async (item) => {
-        const contacto = await repositorioContato.listarContato(item.contato);
+      contatoCliente.map(async (item) => {
+        const contacto = await repositorioContato.listarContato(item.contacto);
         if (contacto)
-          throw new AppError(`Esse Contato ${item.contato} Já Existe`, 400);
+          throw new AppError(`Esse Contato ${item.contacto} Já Existe`, 400);
       })
     );
 
     await Promise.all(
-      iContato.map(async (item) => {
-        const tipoContato = await repositorioTipoContato.listarUmTipoContato(
+      contatoCliente.map(async (item) => {
+        const tipoContato = await repositorioTipoContato.listarTipoContatoId(
           item.tipoContactoId
         );
         if (!tipoContato)
-          throw new AppError("Tipo de Contato Não Encontrado!", 400);
+          throw new AppError(
+            `Tipo de Contato ${item.tipoContactoId} Não Encontrado!`,
+            400
+          );
       })
     );
+
     const result = await repositorio.criar({
       nome,
       numeroBI,
       imagemUrl,
     });
 
+    await Promise.all(
+      contatoCliente.map(async ({ contacto, tipoContactoId }) => {
+        await repositorioContato.criar({
+          contacto,
+          tipoContactoId,
+          clienteId: result.id,
+        });
+      })
+    );
     return result;
   }
 }
