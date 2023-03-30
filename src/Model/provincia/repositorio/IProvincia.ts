@@ -4,12 +4,14 @@ export interface IAtualizar {
   id: string;
   nome: string;
 }
-
+export interface ITipo {
+  nome: string;
+}
 export interface IProvincia {
-  criar(nome: string): Promise<Provincia>;
+  criar({}: ITipo): Promise<Provincia>;
   listarProvinciaId(id: string): Promise<Provincia | undefined>;
   listarTodaProvincia(): Promise<Provincia[]>;
-  listarUmaProvincia(nome: string): Promise<Provincia | undefined>;
+  listarUmaProvincia(designacao: string): Promise<Provincia | undefined>;
   apagar(id: string): Promise<void>;
   atualizar({}: IAtualizar): Promise<Provincia>;
 }

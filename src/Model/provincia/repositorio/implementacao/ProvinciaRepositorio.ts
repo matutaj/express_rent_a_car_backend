@@ -2,8 +2,11 @@ import { Provincia } from "@prisma/client";
 import { prisma } from "../../../../prisma/client";
 import { IAtualizar, IProvincia } from "../IProvincia";
 
+export interface ITipo {
+  nome: string;
+}
 class ProvinciaRpositorio implements IProvincia {
-  async criar(nome: string): Promise<Provincia> {
+  async criar({ nome }: ITipo): Promise<Provincia> {
     const criaProvincia = await prisma.provincia.create({
       data: { nome },
     });
@@ -24,9 +27,9 @@ class ProvinciaRpositorio implements IProvincia {
     return todaProvincia;
   }
 
-  async listarUmaProvincia(nome: string): Promise<Provincia | undefined> {
+  async listarUmaProvincia(designacao: string): Promise<Provincia | undefined> {
     const umaProvincia =
-      (await prisma.provincia.findFirst({ where: { nome: nome } })) ||
+      (await prisma.provincia.findFirst({ where: { nome: designacao } })) ||
       undefined;
 
     return umaProvincia;
