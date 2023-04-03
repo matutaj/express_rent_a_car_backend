@@ -5,7 +5,11 @@
   "repository": "https://github.com/matutaj/express_rent_a_car_backend",
   "author": "matutaj <matutajorge2002@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node":"16.x"
+  },
   "scripts": {
+    "start": "node src/server.ts",
     "dev": "ts-node-dev --exit-child --transpile-only --ignore-watch node_modules src/server"
   },
   "dependencies": {

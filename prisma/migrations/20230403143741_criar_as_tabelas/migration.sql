@@ -6,13 +6,34 @@ CREATE TABLE "Cliente" (
     "id" TEXT NOT NULL,
     "nome" TEXT NOT NULL,
     "imagemUrl" TEXT,
-    "telefone" TEXT NOT NULL,
     "numeroBI" TEXT NOT NULL,
-    "telefone2" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
     CONSTRAINT "Cliente_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Contato" (
+    "id" TEXT NOT NULL,
+    "contacto" TEXT NOT NULL,
+    "tipoContactoId" TEXT NOT NULL,
+    "clienteId" TEXT,
+    "empresaId" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Contato_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "TipoContato" (
+    "id" TEXT NOT NULL,
+    "descricao" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "TipoContato_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -22,8 +43,6 @@ CREATE TABLE "Empresa" (
     "imagemUrl" TEXT,
     "nif" TEXT NOT NULL,
     "quantidadeCar" INTEGER NOT NULL,
-    "telefone" TEXT NOT NULL,
-    "telefone2" TEXT,
     "descricao" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -125,6 +144,15 @@ CREATE UNIQUE INDEX "Login_clientId_key" ON "Login"("clientId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Login_empresaId_key" ON "Login"("empresaId");
+
+-- AddForeignKey
+ALTER TABLE "Contato" ADD CONSTRAINT "Contato_tipoContactoId_fkey" FOREIGN KEY ("tipoContactoId") REFERENCES "TipoContato"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Contato" ADD CONSTRAINT "Contato_clienteId_fkey" FOREIGN KEY ("clienteId") REFERENCES "Cliente"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Contato" ADD CONSTRAINT "Contato_empresaId_fkey" FOREIGN KEY ("empresaId") REFERENCES "Empresa"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Carro" ADD CONSTRAINT "Carro_empresaId_fkey" FOREIGN KEY ("empresaId") REFERENCES "Empresa"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
