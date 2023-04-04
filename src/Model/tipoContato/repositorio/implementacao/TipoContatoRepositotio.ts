@@ -7,7 +7,7 @@ class TipoContatoRepositorio implements ITipoContato {
     const criarTipoContato = await prisma.tipoContato.create({
       data: { descricao },
     });
-
+     
     return criarTipoContato;
   }
   async listarTipoContato(): Promise<TipoContato[]> {
@@ -28,6 +28,7 @@ class TipoContatoRepositorio implements ITipoContato {
         where: {
            descricao:descricao 
           },
+
       })) || undefined;
 
     return listarUm;
