@@ -7,7 +7,7 @@ class CriarProvinciaController {
   async handle(req: Request, res: Response) {
     const criarProvinciaUseCase = new CriarProvinciaUsaCase();
 
-    if (!( criarProvinciaSchema.isValid(req.body)))
+    if (!(await criarProvinciaSchema.isValid(req.body)))
       throw new AppError("Preencha o nome da Província!", 400);
 
     const result = await criarProvinciaUseCase.execute(req.body);
