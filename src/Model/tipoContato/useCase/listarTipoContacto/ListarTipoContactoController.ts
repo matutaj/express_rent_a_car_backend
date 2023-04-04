@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { ListarTipoContactoUseCase } from "./ListarTipoContactoUseCase";
 
 
-class ListarTipocontactoController{
+class ListarTipoContactoController{
     async handle(req:Request, res:Response){
         const tipoContatoUseCase = new ListarTipoContactoUseCase();
         
@@ -11,4 +11,4 @@ class ListarTipocontactoController{
         
     }
 }
-export{ListarTipocontactoController}
+export{ListarTipoContactoController}

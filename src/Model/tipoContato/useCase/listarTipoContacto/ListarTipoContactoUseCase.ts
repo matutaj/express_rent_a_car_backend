@@ -6,7 +6,7 @@ class ListarTipoContactoUseCase{
     async execute():Promise<TipoContato[]>{
         const reprositorio = new TipoContatoRepositorio();
 
-        const result =await reprositorio.listarTipoContato();
+        const result = await reprositorio.listarTipoContato();
 
         return result;
     }
