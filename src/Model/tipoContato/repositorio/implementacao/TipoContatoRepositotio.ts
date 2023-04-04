@@ -25,10 +25,10 @@ class TipoContatoRepositorio implements ITipoContato {
   ): Promise<TipoContato | undefined> {
     const listarUm =
       (await prisma.tipoContato.findFirst({
-        where: {
-           descricao:descricao 
-          },
 
+        where: { 
+          descricao:descricao
+         },
       })) || undefined;
 
     return listarUm;
