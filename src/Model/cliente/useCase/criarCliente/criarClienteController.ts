@@ -7,7 +7,7 @@ class CriarClienteController {
   async handle(req: Request, res: Response) {
     const criarCliente = new CriarClienteUseCase();
 
-    if (!( criarClienteSchema.isValid(req.body)))
+    if (!(await criarClienteSchema.isValid(req.body)))
       throw new AppError("Preencha Os Dados Necessários ", 400);
 
     const result = await criarCliente.execute(req.body);

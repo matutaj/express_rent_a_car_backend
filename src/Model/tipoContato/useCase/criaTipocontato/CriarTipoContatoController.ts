@@ -9,7 +9,7 @@ class CriarTipoContatoController {
 
     const tipoContatoUseCase = new CriarTipoContatoUseCase();
 
-    if (!( CriarTipoContatoSchema.isValid(req.body)))
+    if (!(await CriarTipoContatoSchema.isValid(req.body)))
       throw new AppError("O Campo deve ser Preenchido!");
 
     const result = await tipoContatoUseCase.execute(descricao);
