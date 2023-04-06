@@ -3,6 +3,9 @@ import { ClienteRepositorio } from "../../repositorio/Implementacao/ClienteRepos
 import { AppError } from "../../../../errors/AppError";
 import { ContatoRpositorio } from "../../../contato/repositorio/Implementacao/ContatoRepositorio";
 import { TipoContatoRepositorio } from "../../../tipoContato/repositorio/implementacao/TipoContatoRepositotio";
+import { LoginRepositorio } from "../../../login/reositorio/implementacao/LoginRepositorio";
+import bcrypt from "bcrypt"
+
 
 export interface IContato {
   contacto: string;
@@ -12,19 +15,22 @@ export interface TipoCliente {
   nome: string;
   numeroBI: string;
   imagemUrl?: string;
+  password:string;
 }
+
 export interface ITodo {
   contatoCliente: IContato[];
   cliente: TipoCliente;
 }
 class CriarClienteUseCase {
   async execute({
-    cliente: { nome, numeroBI, imagemUrl },
+    cliente: { nome, numeroBI, imagemUrl, password },
     contatoCliente,
   }: ITodo): Promise<Cliente> {
     const repositorio = new ClienteRepositorio();
     const repositorioContato = new ContatoRpositorio();
     const repositorioTipoContato = new TipoContatoRepositorio();
+    const repositorioLogin = new LoginRepositorio();
 
     const ExistNumenroBI = await repositorio.pegarPeloBI(numeroBI);
 
@@ -67,7 +73,17 @@ class CriarClienteUseCase {
         });
       })
     );
+    const hashPassword = await bcrypt.hash(password, 8)
+
+    await repositorioLogin.criar({
+      email:contatoCliente[0].contacto,
+      clientId:result.id,
+      password:hashPassword
+    })
+
     return result;
+
   }
+
 }
 export { CriarClienteUseCase };
