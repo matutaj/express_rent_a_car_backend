@@ -37,3 +37,4 @@ class LoginRepositorio implements ILogin{
       return atualizarLogin;
   }
 }
+export{ LoginRepositorio}
