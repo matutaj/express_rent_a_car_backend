@@ -68,6 +68,8 @@ model Empresa {
   Carro Carro[]
   Login Login?
   Contato Contato[]
+  Distrito Distrito[]
+
 
 }
 
@@ -154,9 +156,11 @@ model Distrito {
   bairro      String
   rua         String?
   municipioId String
+  empresaId String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   Municipio Municipio @relation(fields: [municipioId], references: [id])
+  Empresa Empresa @relation(fields:[empresaId], references:[id])
 }

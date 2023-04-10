@@ -11,22 +11,12 @@ class LoginRepositorio implements ILogin{
         return criarLogin;
     }
 
-    async listarClienteId(id: string): Promise<Cliente | undefined> {
-        const listarClient = await prisma.cliente.findUnique({where:{id}}) || undefined;
-
-        return listarClient;
-    }
-
     async listarEmail(email: string): Promise<Login | undefined> {
         const listEmail = await prisma.login.findFirst({where:{email}}) || undefined;
 
         return listEmail;
     }
-    async listarEmpresaId(id: string): Promise<Empresa | undefined> {
-        const listEmpresa = await prisma.empresa.findUnique({where:{id}}) || undefined;
-
-        return listEmpresa;
-    }
+    
     async apagar(email: string): Promise<void> {
         await prisma.login.delete({where:{email}})
     }
