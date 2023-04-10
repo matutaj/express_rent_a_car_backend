@@ -38,6 +38,11 @@ class EmpresaRepositorio implements IEmpresa {
 
         return listarEmpresaNome;
     }
+    async listarNifEmpesa(nif: string): Promise<Empresa | undefined> {
+        const nifEmpresa = await prisma.empresa.findFirst({ where: { nif } }) || undefined;
+
+        return nifEmpresa;
+    }
 
     async apagar(id: string): Promise<void> {
         await prisma.empresa.delete({ where: { id } })

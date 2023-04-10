@@ -15,5 +15,6 @@ export interface IEmpresa {
     listarEmpresaId(id: string): Promise<Empresa | undefined>;
     listarUmaEmpresa(nome: string): Promise<Empresa | undefined>;
     apagar(id: string): Promise<void>;
+    listarNifEmpesa(nif: string): Promise<Empresa | undefined>;
     atualizar({ }: Dados): Promise<Empresa>
 }

@@ -7,6 +7,7 @@ import { municipioRoutes } from "./municipio.routes";
 import { distritoRoutes } from "./distrito.routes";
 import { loginRoutes } from "./login.routes";
 import { sessaoRoutes } from "./sessao.routes";
+import { empresaRoutes } from "./empresa.routes";
 
 const routes = Router();
 
@@ -17,5 +18,6 @@ routes.use("/provincia", provinciaRoutes);
 routes.use("/municipio", municipioRoutes);
 routes.use("/distrito", distritoRoutes);
 routes.use("/login", loginRoutes)
-routes.use("/sessao",sessaoRoutes )
+routes.use("/sessao", sessaoRoutes)
+routes.use("/empresa", empresaRoutes)
 export { routes };
