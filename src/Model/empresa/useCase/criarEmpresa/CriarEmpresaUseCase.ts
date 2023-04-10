@@ -88,7 +88,6 @@ class CriarEmpresaUseCase {
             descricao
         })
 
-
         await Promise.all(
             contacto.map(async ({ contacto, tipoContactoId }) => {
                 await repositorioContacto.criar({
