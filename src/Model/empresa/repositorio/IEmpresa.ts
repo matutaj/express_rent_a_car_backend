@@ -5,7 +5,7 @@ export interface Dados {
     nome: string;
     imagemUrl?: string;
     nif: string;
-    quantidadeCar: string;
+    quantidadeCar: number;
     descricao: string;
 }
 
