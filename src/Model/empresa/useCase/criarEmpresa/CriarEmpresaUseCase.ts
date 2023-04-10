@@ -5,6 +5,9 @@ import { DistritoRepositorio } from "../../../distrito/repositorio/implementacao
 import { AppError } from "../../../../errors/AppError";
 import { TipoContatoRepositorio } from "../../../tipoContato/repositorio/implementacao/TipoContatoRepositotio";
 import { MunicipioRepositorio } from "../../../municipio/repositorio/implementacao/MunicipioRepositorio";
+import { LoginRepositorio } from "../../../login/reositorio/implementacao/LoginRepositorio";
+import bcrypt from "bcrypt";
+
 
 export interface DadosEmpresa {
     nome: string;
@@ -12,6 +15,7 @@ export interface DadosEmpresa {
     nif: string;
     quantidadeCar: number;
     descricao: string;
+    password: string
 }
 export interface Endereco {
     municipioId: string;
@@ -33,7 +37,7 @@ export interface CriarEmpresa {
 
 class CriarEmpresaUseCase {
     async execute({
-        dadoEmpresa: { nome, imagemUrl, nif, quantidadeCar, descricao },
+        dadoEmpresa: { nome, password, imagemUrl, nif, quantidadeCar, descricao },
         endereco,
         contacto
     }: CriarEmpresa): Promise<Empresa> {
@@ -42,7 +46,7 @@ class CriarEmpresaUseCase {
         const repositorioDistrito = new DistritoRepositorio();
         const repositorioTipocontacto = new TipoContatoRepositorio();
         const repositorioMunicipio = new MunicipioRepositorio();
-
+        const respositorioLogin = new LoginRepositorio();
         const existeEmpresa = await repositorio.listarNifEmpesa(nif)
         if (existeEmpresa)
             throw new AppError("Esta Empresa Já Foi Criada", 400)
@@ -110,6 +114,13 @@ class CriarEmpresaUseCase {
                 })
             })
         )
+        const hashPassword = await bcrypt.hash(password, 8);
+
+        await respositorioLogin.criar({
+            email: contacto[0].contacto,
+            empresaId: result.id,
+            password: hashPassword
+        })
 
         return result;
     }
