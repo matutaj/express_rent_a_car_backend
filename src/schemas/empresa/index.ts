@@ -6,5 +6,7 @@ const criarEmpresaSchema = Yup.object().shape({
     descriacao: Yup.string(),
     quantidadeCar: Yup.number().required(),
 })
-
-export { criarEmpresaSchema }
+const listarNifEmpresaSchema = Yup.object().shape({
+    nif: Yup.string().required(),
+})
+export { criarEmpresaSchema, listarNifEmpresaSchema }
