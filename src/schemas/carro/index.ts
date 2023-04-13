@@ -13,4 +13,7 @@ const criarcarroSchema = Yup.object().shape({
 const modeloCarroSchema = Yup.object().shape({
     modelo: Yup.string().required()
 })
-export { criarcarroSchema, modeloCarroSchema }
+const empresaCarroSchema = Yup.object().shape({
+    empresaId: Yup.string().uuid().required()
+})
+export { criarcarroSchema, modeloCarroSchema, empresaCarroSchema }
