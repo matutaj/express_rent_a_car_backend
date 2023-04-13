@@ -5,10 +5,10 @@ export interface DadosCarro {
     id?: string
     nome: string;
     modelo: string;
-    imaemUrl?: string;
-    valorAluguel: string;
-    caucao: string;
-    fraquia: string;
+    imagemUrl?: string;
+    valorAluguel: number;
+    caucao: number;
+    fraquia: number;
     empresaId: string;
 }
 export interface ICarro {
