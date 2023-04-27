@@ -49,18 +49,18 @@ class AgendamentoRepositorio implements IAgendamento {
     }
 
     async listarAgendamentoPorEmpresa(empresaId: string): Promise<Reserva[]> {
-        const listarAgendaPorEmpresa = await prisma.reserva.findMany({ where: { empresaId } })
+        const listarAgendaPorEmpresa = await prisma.reserva.findMany({ where: { id: empresaId } })
 
         return listarAgendaPorEmpresa;
     }
     async listarCarro(carroId: string): Promise<Carro | undefined> {
-        const carro = await prisma.carro.findUnique({ where: { carroId } }) || undefined;
+        const carro = await prisma.carro.findUnique({ where: { id: carroId } }) || undefined;
 
         return carro;
     }
 
     async listarEmpresa(empresaId: string): Promise<Empresa | undefined> {
-        const empresa = await prisma.empresa.findUnique({ where: { empresaId } }) || undefined;
+        const empresa = await prisma.empresa.findUnique({ where: { id: empresaId } }) || undefined;
 
         return empresa;
     }
