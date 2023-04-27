@@ -8,7 +8,7 @@ class AgendamentoRepositorio implements IAgendamento {
     async criar({
         clienteId,
         carroId,
-        dataEntrga,
+        dataEntrega,
         dataDevolucao,
         comprovativoUrl,
         nomeAuroporto,
@@ -22,7 +22,7 @@ class AgendamentoRepositorio implements IAgendamento {
             data: {
                 clienteId,
                 carroId,
-                dataEntrga,
+                dataEntrega,
                 dataDevolucao,
                 comprovativoUrl,
                 nomeAuroporto,
@@ -67,7 +67,7 @@ class AgendamentoRepositorio implements IAgendamento {
     async atualizarAgendamento({ id,
         clienteId,
         carroId,
-        dataEntrga,
+        dataEntrega,
         dataDevolucao,
         comprovativoUrl,
         nomeAuroporto,
@@ -80,7 +80,7 @@ class AgendamentoRepositorio implements IAgendamento {
             where: { id }, data: {
                 clienteId,
                 carroId,
-                dataEntrga,
+                dataEntrega,
                 dataDevolucao,
                 comprovativoUrl,
                 nomeAuroporto,

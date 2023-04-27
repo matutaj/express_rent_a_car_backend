@@ -3,12 +3,12 @@ import { AgendamentoRepositorio } from "../repositorio/implementacao/Agendamento
 import { DadoAgendamento } from "../repositorio/IAgendamento";
 import { AppError } from "../../../errors/AppError";
 import { ClienteRepositorio } from "../../cliente/repositorio/Implementacao/ClienteRepository";
-import { compareAsc } from "date-fns"
+import { compareAsc, parseISO } from "date-fns"
 
 class CriarAgendamentoUseCase {
     async execute({ clienteId,
         carroId,
-        dataEntrga,
+        dataEntrega,
         dataDevolucao,
         comprovativoUrl,
         nomeAuroporto,
@@ -51,19 +51,19 @@ class CriarAgendamentoUseCase {
 
         const dataAtual = Date.now();
         //comparando a data do agendamento com a data atual
-        const horaValida = compareAsc(dataEntrga, dataAtual);
+        const horaValida = compareAsc(dataEntrega, dataAtual);
         if (horaValida === -1)
             throw new AppError("Digite Uma data Válida!", 400);
 
-        //comparando a data da devolução com a data de Entrega
-        const validarDataDevolucao = compareAsc(dataDevolucao, dataEntrga);
+        //  comparando a data da devolução com a data de Entrega
+        const validarDataDevolucao = compareAsc(dataDevolucao, dataEntrega);
         if (validarDataDevolucao === -1)
             throw new AppError("Data Inválida!", 400)
 
         const result = await repositorio.criar({
             clienteId,
             carroId,
-            dataEntrga,
+            dataEntrega,
             dataDevolucao,
             comprovativoUrl,
             nomeAuroporto,
