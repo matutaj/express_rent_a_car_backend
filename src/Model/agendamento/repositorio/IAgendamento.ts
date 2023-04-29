@@ -4,8 +4,8 @@ export interface DadoAgendamento {
     id?: string;
     clienteId: string;
     carroId: string;
-    dataEntrega: Date
-    dataDevolucao: Date
+    dataEntrega: Date;
+    dataDevolucao: Date;
     comprovativoUrl: string;
     nomeAuroporto?: string;
     nAviao?: string;

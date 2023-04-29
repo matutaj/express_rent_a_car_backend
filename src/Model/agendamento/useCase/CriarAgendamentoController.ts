@@ -7,7 +7,7 @@ class CriarAgendamentoController {
     async handle(req: Request, res: Response) {
         const agendamentoUseCase = new CriarAgendamentoUseCase();
 
-        if (!await (agendamentoschema.isValid(req.body)))
+        if (!(await agendamentoschema.isValid(req.body)))
             throw new AppError("Preencha os Campos Obrigatórios!", 400)
 
         const result = await agendamentoUseCase.execute(req.body);

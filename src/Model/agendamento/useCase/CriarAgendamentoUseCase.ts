@@ -46,25 +46,29 @@ class CriarAgendamentoUseCase {
         if (nomeAuroporto && !nAcento)
             throw new AppError("Preencha O número do Acento", 400)
 
-        // if (!comprovativoUrl)
-        //     throw new AppError("Envie o Comprovativo!", 400)
+        if (!comprovativoUrl)
+            throw new AppError("Envie o Comprovativo!", 400)
 
+        const dataAgenda = parseISO(`${dataEntrega}`);
+        const dataDev = parseISO(`${dataDevolucao}`)
         const dataAtual = Date.now();
         //comparando a data do agendamento com a data atual
-        const horaValida = compareAsc(dataEntrega, dataAtual);
-        if (horaValida === -1)
+        const horaValida = compareAsc(dataAgenda, dataAtual);
+        console.log(horaValida)
+        if (horaValida == -1)
             throw new AppError("Digite Uma data Válida!", 400);
 
         //  comparando a data da devolução com a data de Entrega
-        const validarDataDevolucao = compareAsc(dataDevolucao, dataEntrega);
-        if (validarDataDevolucao === -1)
+
+        const validarDataDevolucao = compareAsc(dataDev, dataAgenda);
+        if (validarDataDevolucao == -1)
             throw new AppError("Data Inválida!", 400)
 
         const result = await repositorio.criar({
             clienteId,
             carroId,
-            dataEntrega,
-            dataDevolucao,
+            dataEntrega: dataAgenda,
+            dataDevolucao: dataDev,
             comprovativoUrl,
             nomeAuroporto,
             nAviao,

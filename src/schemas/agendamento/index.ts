@@ -5,7 +5,7 @@ const agendamentoschema = Yup.object().shape({
     carroId: Yup.string().uuid().required(),
     dataEntrga: Yup.date().required(),
     dataDevolucao: Yup.date().required(),
-    //  comprovativoUrl:Yup.string().required()
+    comprovativoUrl: Yup.string().required()
 })
 
 export { agendamentoschema }
