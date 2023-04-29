@@ -23,8 +23,12 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
+    "@types/date-fns": "^2.6.0",
     "@types/express": "^4.17.17",
     "@types/jsonwebtoken": "^9.0.1",
+    "@types/node-schedule": "^2.1.0",
+    "date-fns": "^2.29.3",
+    "node-schedule": "^2.1.1",
     "prisma": "^4.11.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.0.2"
