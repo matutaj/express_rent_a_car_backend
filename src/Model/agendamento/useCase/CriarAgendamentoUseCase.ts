@@ -22,6 +22,8 @@ class CriarAgendamentoUseCase {
 
         const existClient = await repositorioClient.listarUmCliente(clienteId)
         const existCarroId = await repositorio.listarCarro(carroId);
+        const verificarAgenda = await repositorio.listarAgendamentoPorCliente(clienteId)
+
 
         if (!clienteId)
             throw new AppError("Usuário Não Existe!", 400)
@@ -63,7 +65,8 @@ class CriarAgendamentoUseCase {
         const validarDataDevolucao = compareAsc(dataDev, dataAgenda);
         if (validarDataDevolucao == -1)
             throw new AppError("Data Inválida!", 400)
-
+        if (verificarAgenda.filter(item => item.dataEntrega == dataAgenda))
+            throw new AppError("Já Tens Uma Reserva Nesta Data", 400)
         const result = await repositorio.criar({
             clienteId,
             carroId,
