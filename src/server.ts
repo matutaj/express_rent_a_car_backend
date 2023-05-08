@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 2222;
 
 app.use(express.json());
 
+app.use("/imagem", express.static("uploads"))
 app.use(routes);
 app.use(AppErrorHandler);
 app.listen(PORT, () => {
