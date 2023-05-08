@@ -10,11 +10,15 @@ const listarCarroModelo = new ListarCarroModeloCantroller();
 const listarCarroEmpresa = new ListarCarroEmpresaController();
 
 const carroRoutes = Router();
+const imagemRoutes = Router();
 
 const upload = multer({ storage })
 
-carroRoutes.post("/", upload.array("imagem"), criarCarro.handle)
+imagemRoutes.post("/", upload.array("imagem"), (req, res) => {
+    return res.status(200).json(req.file?.filename)
+})
+carroRoutes.post("/", criarCarro.handle)
 carroRoutes.get("/:modelo", listarCarroModelo.handle);
 carroRoutes.get("/:empresaId", listarCarroEmpresa.handle)
 
-export { carroRoutes }
+export { carroRoutes, imagemRoutes }
