@@ -2,7 +2,6 @@ import * as Yup from "yup";
 
 const criarClienteSchema = Yup.object().shape({
   nome: Yup.string().required(),
-  numeroBI: Yup.string().required(),
   imagemUrl: Yup.string()
 });
 

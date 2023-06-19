@@ -1,15 +1,13 @@
 import { Cliente } from ".prisma/client";
 import { prisma } from "../../../../prisma/client";
-import { Atulizar, ICliente, TCriar } from "../ICliente";
+import { ICliente, TCriar } from "../ICliente";
 
 class ClienteRepositorio implements ICliente {
-  async criar({ nome, numeroBI, imagemUrl }: TCriar): Promise<Cliente> {
+  async criar({ nome, imagemUrl }: TCriar): Promise<Cliente> {
     const cirarCliente = await prisma.cliente.create({
       data: {
-        nome,
-        numeroBI,
-        imagemUrl,
-      },
+        nome, imagemUrl
+      }
     });
 
     return cirarCliente;
@@ -22,14 +20,7 @@ class ClienteRepositorio implements ICliente {
     return listarCliente;
   }
 
-  async pegarPeloBI(BI: string): Promise<Cliente | undefined> {
-    const pegarBI =
-      (await prisma.cliente.findUnique({
-        where: { numeroBI: BI },
-      })) || undefined;
 
-    return pegarBI;
-  }
   async listarTodoCliente(): Promise<Cliente[]> {
     const listar = await prisma.cliente.findMany();
 
@@ -47,12 +38,12 @@ class ClienteRepositorio implements ICliente {
   async atualizar({
     id,
     nome,
-    numeroBI,
+
     imagemUrl,
-  }: Atulizar): Promise<Cliente> {
+  }: TCriar): Promise<Cliente> {
     const atualizando = await prisma.cliente.update({
       where: { id },
-      data: { nome, numeroBI, imagemUrl },
+      data: { nome, imagemUrl },
     });
     return atualizando;
   }

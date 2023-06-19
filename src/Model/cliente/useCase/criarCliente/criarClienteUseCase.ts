@@ -13,9 +13,8 @@ export interface IContato {
 }
 export interface TipoCliente {
   nome: string;
-  numeroBI: string;
   imagemUrl?: string;
-  password:string;
+  password: string;
 }
 
 export interface ITodo {
@@ -24,18 +23,13 @@ export interface ITodo {
 }
 class CriarClienteUseCase {
   async execute({
-    cliente: { nome, numeroBI, imagemUrl, password },
+    cliente: { nome, imagemUrl, password },
     contatoCliente,
   }: ITodo): Promise<Cliente> {
     const repositorio = new ClienteRepositorio();
     const repositorioContato = new ContatoRpositorio();
     const repositorioTipoContato = new TipoContatoRepositorio();
     const repositorioLogin = new LoginRepositorio();
-
-    const ExistNumenroBI = await repositorio.pegarPeloBI(numeroBI);
-
-    if (ExistNumenroBI)
-      throw new AppError("Já existe alguém com esse número de BI!");
 
     await Promise.all(
       contatoCliente.map(async (item) => {
@@ -60,7 +54,6 @@ class CriarClienteUseCase {
 
     const result = await repositorio.criar({
       nome,
-      numeroBI,
       imagemUrl,
     });
 
@@ -76,9 +69,9 @@ class CriarClienteUseCase {
     const hashPassword = await bcrypt.hash(password, 8)
 
     await repositorioLogin.criar({
-      email:contatoCliente[0].contacto,
-      clientId:result.id,
-      password:hashPassword
+      email: contatoCliente[0].contacto,
+      clientId: result.id,
+      password: hashPassword
     })
 
     return result;

@@ -20,8 +20,6 @@ model Cliente {
   nome      String
   imagemUrl String?
 
-  numeroBI String @unique
-
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
