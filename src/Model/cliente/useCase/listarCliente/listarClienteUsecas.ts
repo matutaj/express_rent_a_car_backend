@@ -9,15 +9,6 @@ class ListarClienteUseCase {
 
     return resul;
   }
-  async executeId(BI: string): Promise<Cliente> {
-    const listarUmclienteBI = new ClienteRepositorio();
-
-    const existeClienteBI = await listarUmclienteBI.pegarPeloBI(BI);
-
-    if (!existeClienteBI) throw new Error("Não existe usuário com este BI");
-
-    return existeClienteBI;
-  }
 }
 
 export { ListarClienteUseCase };
