@@ -10,5 +10,4 @@ const clienteRoutes = Router();
 
 clienteRoutes.post("/", criarCliente.handle);
 clienteRoutes.get("/", listarCliente.handle);
-clienteRoutes.get("/:BI", listarCliente.handleBI);
 export { clienteRoutes };
