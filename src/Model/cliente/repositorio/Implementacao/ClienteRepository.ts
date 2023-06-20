@@ -38,7 +38,6 @@ class ClienteRepositorio implements ICliente {
   async atualizar({
     id,
     nome,
-
     imagemUrl,
   }: TCriar): Promise<Cliente> {
     const atualizando = await prisma.cliente.update({
