@@ -6,7 +6,7 @@ import { AppError } from "../../../../errors/AppError";
 class ListarCarroModeloCantroller {
     async handle(req: Request, res: Response) {
         const listarModelo = new ListarCarroModeloUseCase()
-        const { modelo } = req.body
+        const { modelo } = req.params
 
         if (!(modeloCarroSchema.isValid(modelo)))
             throw new AppError("Preencha o Modelo", 400)
