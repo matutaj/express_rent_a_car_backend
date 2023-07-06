@@ -7,7 +7,7 @@ class CriarCarroController {
     async handle(req: Request, res: Response) {
         const criarCarroUseCase = new CriarCarroUseCase();
 
-        if (!(await criarcarroSchema.isValid(req.body)))
+        if (!(criarcarroSchema.isValid(req.body)))
             throw new AppError("Preencha Os Campos Necessários!", 400);
 
         const result = await criarCarroUseCase.exucete(req.body);
