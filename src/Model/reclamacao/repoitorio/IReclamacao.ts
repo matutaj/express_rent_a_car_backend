@@ -1,6 +1,6 @@
 import { Reclamacao } from "@prisma/client"
 
-interface IDadoReclamacao {
+export interface IDadoReclamacao {
     id?: string;
     clienteId: string;
     titulo: string;
