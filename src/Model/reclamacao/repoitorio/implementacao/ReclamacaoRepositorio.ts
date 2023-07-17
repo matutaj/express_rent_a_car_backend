@@ -21,3 +21,4 @@ class ReclamacaoRepositorio implements IReclamacao {
         await prisma.reclamacao.delete({ where: { id } })
     }
 }
+export { ReclamacaoRepositorio }
