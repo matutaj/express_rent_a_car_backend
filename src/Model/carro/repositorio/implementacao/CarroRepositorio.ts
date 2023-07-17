@@ -47,8 +47,8 @@ class CarroRepositorio implements ICarro {
         return listCarro;
     }
 
-    async listarModeloCarro(modelo: string): Promise<Carro[]> {
-        const listarModelo = await prisma.carro.findMany({ where: { modelo } });
+    async listarModeloCarro(mode: string): Promise<Carro[]> {
+        const listarModelo = await prisma.carro.findMany({ where: { nome: mode } });
 
         return listarModelo;
     }

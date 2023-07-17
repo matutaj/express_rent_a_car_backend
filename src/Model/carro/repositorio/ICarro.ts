@@ -18,7 +18,7 @@ export interface ICarro {
     listarCarroId(id: string): Promise<Carro | undefined>;
     listarNomeCarro(nome: string): Promise<Carro[]>;
     listarCarro(): Promise<Carro[]>;
-    listarModeloCarro(modelo: string): Promise<Carro[]>;
+    listarModeloCarro(mode: string): Promise<Carro[]>;
     apagar(id: string): Promise<void>
     atualizar({ }: DadosCarro): Promise<Carro>
 }
