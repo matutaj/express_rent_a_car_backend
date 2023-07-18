@@ -10,6 +10,7 @@ import { sessaoRoutes } from "./sessao.routes";
 import { empresaRoutes } from "./empresa.routes";
 import { carroRoutes, imagemRoutes } from "./carro.routes";
 import { agendaRoutes } from "./agendamento.routes";
+import { reclamacaoRouter } from "./reclamacao.routes";
 
 const routes = Router();
 
@@ -25,4 +26,5 @@ routes.use("/empresa", empresaRoutes)
 routes.use("/carro", carroRoutes)
 routes.use("/agendamento", agendaRoutes)
 routes.use("/upload", imagemRoutes);
+routes.use("/reclamacao", reclamacaoRouter)
 export { routes };
