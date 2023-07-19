@@ -23,9 +23,10 @@ model Cliente {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Reserva Reserva[]
-  Login   Login?
-  Contato Contato[]
+  Reserva    Reserva[]
+  Login      Login?
+  Contato    Contato[]
+  Reclamacao Reclamacao[]
 }
 
 model Contato {
@@ -159,4 +160,12 @@ model Distrito {
 
   Municipio Municipio @relation(fields: [municipioId], references: [id])
   Empresa   Empresa   @relation(fields: [empresaId], references: [id])
+}
+
+model Reclamacao {
+  id        String  @id @default(uuid())
+  clienteId String
+  cliente   Cliente @relation(fields: [clienteId], references: [id])
+  titulo    String
+  descricao String
 }
