@@ -7,7 +7,7 @@ import { TipoContatoRepositorio } from "../../../tipoContato/repositorio/impleme
 import { MunicipioRepositorio } from "../../../municipio/repositorio/implementacao/MunicipioRepositorio";
 import { LoginRepositorio } from "../../../login/reositorio/implementacao/LoginRepositorio";
 import bcrypt from "bcrypt";
-
+import { enviarEmail } from "../../../../config/email";
 
 export interface DadosEmpresa {
     nome: string;
@@ -119,6 +119,15 @@ class CriarEmpresaUseCase {
             email: contacto[0].contacto,
             empresaId: result.id,
             password: hashPassword
+        })
+
+        await enviarEmail({
+            to: contacto[0].contacto,
+            subject: "[Express rent a car ] Email de confirmação",
+            html: `<div> 
+                <h2> Este Email foi enviado para a empresa ${result.nome} seja bem vindo a nossa plataforma </h2>
+                <p> Qualquer informação que precisar pode entrar em contacto </p>
+            </div>`
         })
 
         return result;
