@@ -11,8 +11,16 @@ import { empresaRoutes } from "./empresa.routes";
 import { carroRoutes, imagemRoutes } from "./carro.routes";
 import { agendaRoutes } from "./agendamento.routes";
 import { reclamacaoRouter } from "./reclamacao.routes";
-
+import "../config/auth/authWithgoogle"
+import passport from "passport";
 const routes = Router();
+
+
+routes.get("/Teste", (req, res) => {
+    res.send('<a href="auth/google">Autenticação com Google </a> ')
+})
+
+routes.get("/auth/google", passport.authenticate('google', { scope: ['email', 'profile'] }))
 
 routes.use("/cliente", clienteRoutes);
 routes.use("/tipoContato", tipoContatoRoutes);
