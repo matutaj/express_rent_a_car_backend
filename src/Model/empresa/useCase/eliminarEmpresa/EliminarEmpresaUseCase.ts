@@ -11,9 +11,9 @@ class EliminarEmpresaUseCase {
         if (!existEmpresa)
             throw new AppError("Id da Empresa Não foi encontrada!", 400);
 
-        const eliminar = await repositorioEmpresa.apagar(id);
+        await repositorioEmpresa.apagar(id);
 
-        return eliminar
+
     }
 }
 
