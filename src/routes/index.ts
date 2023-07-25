@@ -16,7 +16,7 @@ import passport from "passport";
 const routes = Router();
 
 
-routes.get("/Teste", (req, res) => {
+routes.get("/autenticacaoGoogle", (req, res) => {
     res.send('<a href="auth/google">Autenticação com Google </a> ')
 })
 
