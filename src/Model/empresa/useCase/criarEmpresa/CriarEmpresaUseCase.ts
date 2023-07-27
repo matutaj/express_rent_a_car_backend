@@ -47,6 +47,8 @@ class CriarEmpresaUseCase {
         const repositorioTipocontacto = new TipoContatoRepositorio();
         const repositorioMunicipio = new MunicipioRepositorio();
         const respositorioLogin = new LoginRepositorio();
+
+
         const existeEmpresa = await repositorio.listarNifEmpesa(nif)
         if (existeEmpresa)
             throw new AppError("Esta Empresa Já Foi Criada", 400)

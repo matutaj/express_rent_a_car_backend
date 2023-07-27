@@ -63,7 +63,6 @@ class EmpresaRepositorio implements IEmpresa {
                     data: {
                         nome,
                         imagemUrl,
-                        nif,
                         quantidadeCar,
                         descricao
                     }

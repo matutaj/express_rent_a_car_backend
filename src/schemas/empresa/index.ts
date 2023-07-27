@@ -6,10 +6,16 @@ const criarEmpresaSchema = Yup.object().shape({
     descriacao: Yup.string(),
     quantidadeCar: Yup.number().required(),
 })
+const AtualizarEmpresaschema = Yup.object().shape({
+
+    nome: Yup.string(),
+    descriacao: Yup.string(),
+    quantidadeCar: Yup.number().required(),
+})
 const listarNifEmpresaSchema = Yup.object().shape({
     nif: Yup.string().required(),
 })
-const eliminarEmpresaId = Yup.object().shape({
+const EmpresaId = Yup.object().shape({
     id: Yup.string().required()
 })
-export { criarEmpresaSchema, eliminarEmpresaId, listarNifEmpresaSchema }
+export { criarEmpresaSchema, EmpresaId, listarNifEmpresaSchema, AtualizarEmpresaschema }
