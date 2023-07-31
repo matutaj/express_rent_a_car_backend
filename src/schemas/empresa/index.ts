@@ -18,4 +18,7 @@ const listarNifEmpresaSchema = Yup.object().shape({
 const EmpresaId = Yup.object().shape({
     id: Yup.string().required()
 })
-export { criarEmpresaSchema, EmpresaId, listarNifEmpresaSchema, AtualizarEmpresaschema }
+const listarEmpresapeloNomaSchema = Yup.object().shape({
+    nome: Yup.string().required()
+})
+export { criarEmpresaSchema, EmpresaId, listarEmpresapeloNomaSchema, listarNifEmpresaSchema, AtualizarEmpresaschema }
