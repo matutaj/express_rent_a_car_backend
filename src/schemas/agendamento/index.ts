@@ -7,5 +7,7 @@ const agendamentoschema = Yup.object().shape({
     dataDevolucao: Yup.date().required(),
     comprovativoUrl: Yup.string().required()
 })
-
-export { agendamentoschema }
+const listarAgendamentoSchema = Yup.object().shape({
+    empresaId: Yup.string().required()
+})
+export { agendamentoschema, listarAgendamentoSchema }
