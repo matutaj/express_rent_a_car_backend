@@ -20,6 +20,7 @@ class CriarCarroUseCase {
         if (!existEmpresa)
             throw new AppError("Não Existe Está Empresa!", 400)
 
+
         const result = await repositorio.criar({
             nome,
             modelo,

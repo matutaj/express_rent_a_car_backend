@@ -49,7 +49,7 @@ class AgendamentoRepositorio implements IAgendamento {
     }
 
     async listarAgendamentoPorEmpresa(empresaId: string): Promise<Reserva[]> {
-        const listarAgendaPorEmpresa = await prisma.reserva.findMany({ where: { id: empresaId } })
+        const listarAgendaPorEmpresa = await prisma.reserva.findMany({ where: { Carro: { empresaId: empresaId } } })
 
         return listarAgendaPorEmpresa;
     }

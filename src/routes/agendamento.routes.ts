@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { CriarAgendamentoController } from "../Model/agendamento/useCase/CriarAgendamentoController";
+import { CriarAgendamentoController } from "../Model/agendamento/useCase/criarAgendamento/CriarAgendamentoController";
 
 const agendar = new CriarAgendamentoController();
 

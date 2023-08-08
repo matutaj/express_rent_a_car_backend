@@ -1,8 +1,8 @@
 import { Reserva } from "@prisma/client";
-import { AgendamentoRepositorio } from "../repositorio/implementacao/AgendamentoRepositorio";
-import { DadoAgendamento } from "../repositorio/IAgendamento";
-import { AppError } from "../../../errors/AppError";
-import { ClienteRepositorio } from "../../cliente/repositorio/Implementacao/ClienteRepository";
+import { AgendamentoRepositorio } from "../../repositorio/implementacao/AgendamentoRepositorio";
+import { DadoAgendamento } from "../../repositorio/IAgendamento";
+import { AppError } from "../../../../errors/AppError";
+import { ClienteRepositorio } from "../../../cliente/repositorio/Implementacao/ClienteRepository";
 import { compareAsc, parseISO } from "date-fns"
 
 class CriarAgendamentoUseCase {
