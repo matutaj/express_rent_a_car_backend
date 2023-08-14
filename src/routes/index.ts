@@ -17,7 +17,7 @@ const routes = Router();
 
 
 routes.get("/autenticacaoGoogle", (req, res) => {
-    res.send('<a href="auth/google">Autenticação com Google </a> ')
+    res.send('auth/google')
 })
 
 routes.get("/auth/google", passport.authenticate('google', { scope: ['email', 'profile'] }))

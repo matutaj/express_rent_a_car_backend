@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { CriarAgendamentoUseCase } from "./CriarAgendamentoUseCase";
-import { agendamentoschema } from "../../../schemas/agendamento";
-import { AppError } from "../../../errors/AppError";
+import { agendamentoschema } from "../../../../schemas/agendamento";
+import { AppError } from "../../../../errors/AppError";
 
 class CriarAgendamentoController {
     async handle(req: Request, res: Response) {

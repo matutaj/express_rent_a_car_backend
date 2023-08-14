@@ -1,8 +1,8 @@
 import { Reserva } from "@prisma/client";
-import { AgendamentoRepositorio } from "../repositorio/implementacao/AgendamentoRepositorio";
-import { DadoAgendamento } from "../repositorio/IAgendamento";
-import { AppError } from "../../../errors/AppError";
-import { ClienteRepositorio } from "../../cliente/repositorio/Implementacao/ClienteRepository";
+import { AgendamentoRepositorio } from "../../repositorio/implementacao/AgendamentoRepositorio";
+import { DadoAgendamento } from "../../repositorio/IAgendamento";
+import { AppError } from "../../../../errors/AppError";
+import { ClienteRepositorio } from "../../../cliente/repositorio/Implementacao/ClienteRepository";
 import { compareAsc, parseISO } from "date-fns"
 
 class CriarAgendamentoUseCase {
@@ -65,8 +65,8 @@ class CriarAgendamentoUseCase {
         const validarDataDevolucao = compareAsc(dataDev, dataAgenda);
         if (validarDataDevolucao == -1)
             throw new AppError("Data Inválida!", 400)
-        if (verificarAgenda.filter(item => item.dataEntrega == dataAgenda))
-            throw new AppError("Já Tens Uma Reserva Nesta Data", 400)
+        // if (verificarAgenda.filter(item => item.dataEntrega == dataAgenda))
+        //     throw new AppError("Já Tens Uma Reserva Nesta Data", 400)
         const result = await repositorio.criar({
             clienteId,
             carroId,

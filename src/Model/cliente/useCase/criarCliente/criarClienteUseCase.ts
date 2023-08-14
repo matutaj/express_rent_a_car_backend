@@ -38,6 +38,7 @@ class CriarClienteUseCase {
           throw new AppError(`Esse Contato ${item.contacto} Já Existe`, 400);
       })
     );
+
     await Promise.all(
       contatoCliente.map(async (item) => {
         const tipoContato = await repositorioTipoContato.listarTipoContatoId(
@@ -55,6 +56,8 @@ class CriarClienteUseCase {
       nome,
       imagemUrl,
     });
+
+
 
     await Promise.all(
       contatoCliente.map(async ({ contacto, tipoContactoId }) => {

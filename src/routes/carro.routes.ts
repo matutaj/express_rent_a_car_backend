@@ -21,7 +21,7 @@ imagemRoutes.post("/", upload.array("imagem"), (req, res) => {
 })
 carroRoutes.post("/", criarCarro.handle)
 carroRoutes.get("/:modelo", listarCarroModelo.handle);
-carroRoutes.get("/:empresaId", listarCarroEmpresa.handle)
+carroRoutes.get("listarCarro/:empresaId", listarCarroEmpresa.handle)
 carroRoutes.get("/", listarCarro.handle)
 
 

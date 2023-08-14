@@ -24,22 +24,22 @@ class EmpresaRepositorio implements IEmpresa {
     };
 
     async listar(): Promise<Empresa[]> {
-        const listarTodaEmpresa = await prisma.empresa.findMany();
+        const listarTodaEmpresa = await prisma.empresa.findMany({ include: { Carro: true, Contato: true } });
         return listarTodaEmpresa;
     }
 
     async listarEmpresaId(id: string): Promise<Empresa | undefined> {
-        const listarEmpresaId = await prisma.empresa.findUnique({ where: { id } }) || undefined;
+        const listarEmpresaId = await prisma.empresa.findUnique({ where: { id }, include: { Carro: true, Contato: true } }) || undefined;
 
         return listarEmpresaId;
     }
     async listarUmaEmpresa(nome: string): Promise<Empresa | undefined> {
-        const listarEmpresaNome = await prisma.empresa.findFirst({ where: { nome } }) || undefined;
+        const listarEmpresaNome = await prisma.empresa.findFirst({ where: { nome }, include: { Carro: true, Contato: true } }) || undefined;
 
         return listarEmpresaNome;
     }
     async listarNifEmpesa(nif: string): Promise<Empresa | undefined> {
-        const nifEmpresa = await prisma.empresa.findFirst({ where: { nif } }) || undefined;
+        const nifEmpresa = await prisma.empresa.findFirst({ where: { nif }, include: { Carro: true, Contato: true } }) || undefined;
 
         return nifEmpresa;
     }
@@ -63,7 +63,6 @@ class EmpresaRepositorio implements IEmpresa {
                     data: {
                         nome,
                         imagemUrl,
-                        nif,
                         quantidadeCar,
                         descricao
                     }

@@ -26,7 +26,7 @@ class CarroRepositorio implements ICarro {
         return criarCarro;
     }
     async listarCarroId(id: string): Promise<Carro | undefined> {
-        const listarCarroId = await prisma.carro.findUnique({ where: { id } }) || undefined
+        const listarCarroId = await prisma.carro.findUnique({ where: { id }, include: { Empresa: true } }) || undefined
 
         return listarCarroId;
     }
@@ -37,12 +37,12 @@ class CarroRepositorio implements ICarro {
     }
 
     async listarCarro(): Promise<Carro[]> {
-        const listarTodoCarro = await prisma.carro.findMany();
+        const listarTodoCarro = await prisma.carro.findMany({ include: { Empresa: true } });
 
         return listarTodoCarro
     }
     async listarCarroPelaEmpresa(id: string): Promise<Carro[]> {
-        const listCarro = await prisma.carro.findMany({ where: { empresaId: id } })
+        const listCarro = await prisma.carro.findMany({ where: { empresaId: id }, include: { Empresa: true } })
 
         return listCarro;
     }

@@ -38,9 +38,9 @@ model Contato {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  TipoContato TipoContato @relation(fields: [tipoContactoId], references: [id])
-  Cliente     Cliente?    @relation(fields: [clienteId], references: [id])
-  Empresa     Empresa?    @relation(fields: [empresaId], references: [id])
+  TipoContato TipoContato @relation(fields: [tipoContactoId], references: [id], onDelete: Cascade)
+  Cliente     Cliente?    @relation(fields: [clienteId], references: [id], onDelete: Cascade)
+  Empresa     Empresa?    @relation(fields: [empresaId], references: [id], onDelete: Cascade)
 }
 
 model TipoContato {
@@ -82,7 +82,7 @@ model Carro {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  Empresa Empresa @relation(fields: [empresaId], references: [id])
+  Empresa Empresa @relation(fields: [empresaId], references: [id], onDelete: Cascade)
 
   Reserva Reserva[]
 }
@@ -104,8 +104,8 @@ model Reserva {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Carro   Carro   @relation(fields: [carroId], references: [id])
-  Cliente Cliente @relation(fields: [clienteId], references: [id])
+  Carro   Carro   @relation(fields: [carroId], references: [id], onDelete: Cascade)
+  Cliente Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
 }
 
 model Login {
@@ -118,8 +118,8 @@ model Login {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Cliente Cliente? @relation(fields: [clientId], references: [id])
-  Empresa Empresa? @relation(fields: [empresaId], references: [id])
+  Cliente Cliente? @relation(fields: [clientId], references: [id], onDelete: Cascade)
+  Empresa Empresa? @relation(fields: [empresaId], references: [id], onDelete: Cascade)
 
   @@id([email])
 }
@@ -142,7 +142,7 @@ model Municipio {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Provincia Provincia @relation(fields: [provinciaId], references: [id])
+  Provincia Provincia @relation(fields: [provinciaId], references: [id], onDelete: Cascade)
 
   Distrito Distrito[]
 }
@@ -158,14 +158,14 @@ model Distrito {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  Municipio Municipio @relation(fields: [municipioId], references: [id])
-  Empresa   Empresa   @relation(fields: [empresaId], references: [id])
+  Municipio Municipio @relation(fields: [municipioId], references: [id], onDelete: Cascade)
+  Empresa   Empresa   @relation(fields: [empresaId], references: [id], onDelete: Cascade)
 }
 
 model Reclamacao {
   id        String  @id @default(uuid())
   clienteId String
-  cliente   Cliente @relation(fields: [clienteId], references: [id])
+  cliente   Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade)
   titulo    String
   descricao String
 }

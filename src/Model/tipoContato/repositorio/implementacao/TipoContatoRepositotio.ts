@@ -7,17 +7,17 @@ class TipoContatoRepositorio implements ITipoContato {
     const criarTipoContato = await prisma.tipoContato.create({
       data: { descricao },
     });
-     
+
     return criarTipoContato;
   }
   async listarTipoContato(): Promise<TipoContato[]> {
-    const listarTodo = await prisma.tipoContato.findMany();
+    const listarTodo = await prisma.tipoContato.findMany({ include: { Contato: true } });
 
     return listarTodo;
   }
   async listarTipoContatoId(id: string): Promise<TipoContato | undefined> {
     const listarId =
-      (await prisma.tipoContato.findUnique({ where: { id } })) || undefined;
+      await prisma.tipoContato.findUnique({ where: { id }, include: { Contato: true } }) || undefined;
     return listarId;
   }
   async listarUmTipoContato(
@@ -26,8 +26,8 @@ class TipoContatoRepositorio implements ITipoContato {
     const listarUm =
       (await prisma.tipoContato.findFirst({
         where: {
-           descricao:descricao 
-          },
+          descricao: descricao
+        }, include: { Contato: true }
       })) || undefined;
 
     return listarUm;

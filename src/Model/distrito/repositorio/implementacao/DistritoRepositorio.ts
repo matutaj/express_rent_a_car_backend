@@ -13,25 +13,25 @@ class DistritoRepositorio implements IDistrito {
     }
 
     async listarDistritoId(id: string): Promise<Distrito | undefined> {
-        const distritoId = await prisma.distrito.findUnique({ where: { id } }) || undefined;
+        const distritoId = await prisma.distrito.findUnique({ where: { id }, include: { Municipio: true, Empresa: true } }) || undefined;
 
         return distritoId;
     }
 
     async listarMunicipioId(id: string): Promise<Municipio | undefined> {
-        const municipioId = await prisma.municipio.findUnique({ where: { id } }) || undefined;
+        const municipioId = await prisma.municipio.findUnique({ where: { id }, include: { Provincia: true } }) || undefined;
 
         return municipioId;
     }
 
     async listarTodoDistrito(): Promise<Distrito[]> {
-        const todoDistrito = await prisma.distrito.findMany();
+        const todoDistrito = await prisma.distrito.findMany({ include: { Municipio: true, Empresa: true } });
 
         return todoDistrito;
     }
 
     async listarUmDistristo(nome: string): Promise<Distrito | undefined> {
-        const umDistrito = await prisma.distrito.findFirst({ where: { nome } }) || undefined
+        const umDistrito = await prisma.distrito.findFirst({ where: { nome }, include: { Municipio: true, Empresa: true } }) || undefined
 
         return umDistrito;
     }
