@@ -22,14 +22,14 @@ class ProvinciaRpositorio implements IProvincia {
   }
 
   async listarTodaProvincia(): Promise<Provincia[]> {
-    const todaProvincia = await prisma.provincia.findMany();
+    const todaProvincia = await prisma.provincia.findMany({ include: { Municipio: true } });
 
     return todaProvincia;
   }
 
   async listarUmaProvincia(designacao: string): Promise<Provincia | undefined> {
     const umaProvincia =
-      (await prisma.provincia.findFirst({ where: { nome: designacao } })) ||
+      (await prisma.provincia.findFirst({ where: { nome: designacao }, include: { Municipio: true } })) ||
       undefined;
 
     return umaProvincia;
