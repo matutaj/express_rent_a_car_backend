@@ -37,30 +37,30 @@ class AgendamentoRepositorio implements IAgendamento {
     }
 
     async listarAgendamentoPorCliente(clienteId: string): Promise<Reserva[]> {
-        const listarAgendamentoCliente = await prisma.reserva.findMany({ where: { clienteId } });
+        const listarAgendamentoCliente = await prisma.reserva.findMany({ where: { clienteId }, include: { Carro: true } });
 
         return listarAgendamentoCliente;
     }
 
     async listarAgendamentoPorDate(dia: string): Promise<Reserva[]> {
-        const listarAgendamentoData = await prisma.reserva.findMany({ where: { createdAt: dia } });
+        const listarAgendamentoData = await prisma.reserva.findMany({ where: { createdAt: dia }, include: { Carro: true, Cliente: true } });
 
         return listarAgendamentoData;
     }
 
     async listarAgendamentoPorEmpresa(empresaId: string): Promise<Reserva[]> {
-        const listarAgendaPorEmpresa = await prisma.reserva.findMany({ where: { Carro: { empresaId: empresaId } } })
+        const listarAgendaPorEmpresa = await prisma.reserva.findMany({ where: { Carro: { empresaId: empresaId } }, include: { Carro: true, Cliente: true } })
 
         return listarAgendaPorEmpresa;
     }
     async listarCarro(carroId: string): Promise<Carro | undefined> {
-        const carro = await prisma.carro.findUnique({ where: { id: carroId } }) || undefined;
+        const carro = await prisma.carro.findUnique({ where: { id: carroId }, include: { Empresa: true } }) || undefined;
 
         return carro;
     }
 
     async listarEmpresa(empresaId: string): Promise<Empresa | undefined> {
-        const empresa = await prisma.empresa.findUnique({ where: { id: empresaId } }) || undefined;
+        const empresa = await prisma.empresa.findUnique({ where: { id: empresaId }, include: { Carro: true, Contato: true } }) || undefined;
 
         return empresa;
     }
