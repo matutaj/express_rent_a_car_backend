@@ -15,14 +15,14 @@ class ClienteRepositorio implements ICliente {
 
   async listarUmCliente(id: string): Promise<Cliente | undefined> {
     const listarCliente =
-      (await prisma.cliente.findUnique({ where: { id } })) || undefined;
+      (await prisma.cliente.findUnique({ where: { id }, include: { Contato: true, Reserva: true, Reclamacao: true } })) || undefined;
 
     return listarCliente;
   }
 
 
   async listarTodoCliente(): Promise<Cliente[]> {
-    const listar = await prisma.cliente.findMany();
+    const listar = await prisma.cliente.findMany({ include: { Contato: true, Reserva: true, Reclamacao: true } });
 
     return listar;
   }
