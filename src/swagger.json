@@ -1,0 +1,594 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Api de Rent a car",
+    "description": "Essa api tem como objectivo fazer a reserva de carro",
+    "contact": {
+      "email": "matuaj2080@gmail.com"
+    },
+    "version": "1.0.0."
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5553/",
+      "description": "API de Test"
+    },
+    {
+      "url": "https://express-rent-a-car-backend.vercel.app/",
+      "description": "API de Produção"
+    }
+  ],
+  "paths": {
+    "/cliente": {
+      "post": {
+        "summary": "Cadastro de Usuário",
+        "description": " Essa rota será responsável por cadastrar um cliente",
+        "tags": ["Cliente"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cliente"
+              },
+              "examples": {
+                "cliente": {
+                  "value": {
+                    "nome": "Matuta Jorge",
+                    "imagemUrl": "images.jpeg",
+                    "password": "123@adfdre",
+                    "contatoCliente": [
+                      {
+                        "contacto": "matutaj2080@gmail.com",
+                        "tipoContactoId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                      },
+                      {
+                        "contacto": "+244933081862",
+                        "tipoContactoId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                      }
+                    ]
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Cliente"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Lsstar Todos os Clientes",
+        "description": "Essa Rota será responsável por listar todos os clientes",
+        "tags": ["Cliente"],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Cliente"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/empresa": {
+      "post": {
+        "summary": "Cadastro de Empresa",
+        "description": " Essa rota será responsável por cadastrar uma Empresa",
+        "tags": ["Empresa"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empresa"
+              },
+              "examples": {
+                "empresa": {
+                  "value": {
+                    "nome": "Alda António",
+                    "imagemUrl": "images.jpeg",
+                    "password": "123@adfdre",
+                    "nif": "1232143245sdfg",
+                    "quantidadeCar": 23,
+                    "descricao": "lorem ipsom doloremlorem ipsom doloremlorem ipsom doloremlorem ipsom dolorem",
+                    "endereco": {
+                      "municipioID": "4c342105-14cf-40fd-aa7a-702465b8f7f7",
+                      "distrito": "Luanda",
+                      "bairro": "Estalagem",
+                      "rua": "2ª rua do 6"
+                    },
+
+                    "contato": [
+                      {
+                        "contacto": "alda_ntonio23@gmail.com",
+                        "tipoContactoId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                      },
+                      {
+                        "contacto": "+244957734596",
+                        "tipoContactoId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                      }
+                    ]
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Empresa"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Todas as Empresa",
+        "description": "Essa Rota será responsável por listar todos as empresa",
+        "tags": ["Empresa"],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Empresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/empresa/nif": {
+      "get": {
+        "summary": "Listar Empresa Pelo Nif ",
+        "description": "Essa Rota será responsável por listar   Empresa Pelo Nif",
+        "tags": ["Empresa"],
+        "parameters": [
+          {
+            "name": "Nif da Empresa",
+            "in": "query",
+            "description": "Nif da empresa à busca",
+            "requered": true
+          }
+        ],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Empresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/empresa/nome": {
+      "get": {
+        "summary": "Listar Empresa Pelo nome ",
+        "description": "Essa Rota será responsável por listar   Empresa Pelo nome",
+        "tags": ["Empresa"],
+        "parameters": [
+          {
+            "name": "nome da Empresa",
+            "in": "query",
+            "description": "nome da empresa à busca",
+            "requered": true
+          }
+        ],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Empresa"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/empresa/id": {
+      "delete": {
+        "summary": "Deletar Empresa Pelo id ",
+        "description": "Essa Rota será responsável por deletar   Empresa Pelo id",
+        "tags": ["Empresa"],
+        "parameters": [
+          {
+            "name": "id da Empresa",
+            "in": "query",
+            "description": "id da empresa à busca",
+            "requered": true
+          }
+        ],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull"
+          }
+        }
+      }
+    },
+    "/empresa/[id]": {
+      "put": {
+        "summary": "Atualizar Empresa Pelo id ",
+        "description": "Essa Rota será responsável por atualizar   Empresa Pelo id",
+        "tags": ["Empresa"],
+        "parameters": [
+          {
+            "name": "id da Empresa",
+            "in": "query",
+            "description": "id da empresa à busca",
+            "requered": true
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Empresa"
+              },
+              "examples": {
+                "empresa": {
+                  "value": {
+                    "nome": "Alda António",
+                    "imagemUrl": "images.jpeg",
+                    "password": "123@adfdre",
+                    "nif": "1232143245sdfg",
+                    "quantidadeCar": 23,
+                    "descricao": "lorem ipsom doloremlorem ipsom doloremlorem ipsom doloremlorem ipsom dolorem",
+                    "endereco": {
+                      "municipioID": "4c342105-14cf-40fd-aa7a-702465b8f7f7",
+                      "distrito": "Luanda",
+                      "bairro": "Estalagem",
+                      "rua": "2ª rua do 6"
+                    },
+
+                    "contato": [
+                      {
+                        "contacto": "alda_ntonio23@gmail.com",
+                        "tipoContactoId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                      },
+                      {
+                        "contacto": "+244957734596",
+                        "tipoContactoId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                      }
+                    ]
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Empresa"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
+    "/carro": {
+      "post": {
+        "summary": "Cadastro de carro",
+        "description": " Essa rota será responsável por cadastrar  carro",
+        "tags": ["Carro"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Carro"
+              },
+              "examples": {
+                "carro": {
+                  "value": {
+                    "nome": "Toyoto",
+                    "imagemUrl": "images.jpeg",
+                    "valorAluguel": 1200.9,
+                    "caucao": 100,
+                    "fraquia": 50,
+                    "empresaId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Carro"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Todos os Carros",
+        "description": "Essa Rota será responsável por listar Todos os Carros",
+        "tags": ["Carro"],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Carro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carro/empresa": {
+      "get": {
+        "summary": "Listar Carro pela Empresa  ",
+        "description": "Essa Rota será responsável por listar Carro pela Empresa",
+        "tags": ["Carro"],
+        "parameters": [
+          {
+            "name": "nome da Empresa",
+            "in": "query",
+            "description": "Nome  da empresa à busca",
+            "requered": true
+          }
+        ],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Carro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carro/modelo": {
+      "get": {
+        "summary": "Listar Carro pelo Modelo  ",
+        "description": "Essa Rota será responsável por listar Carro pelo Modelo ",
+        "tags": ["Carro"],
+        "parameters": [
+          {
+            "name": "Modelo do Carro",
+            "in": "query",
+            "description": "Modelo do carro à busca",
+            "requered": true
+          }
+        ],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Carro"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Cliente": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "imagemUrl": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "contatoCliente": {
+            "type": "object",
+            "properties": {
+              "contacto": {
+                "type": "string"
+              },
+              "tipoContactoId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Empresa": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "imagemUrl": {
+            "type": "string"
+          },
+          "nif": {
+            "type": "string"
+          },
+          "quantidadeCar": {
+            "type": "Number"
+          },
+          "descricao": {
+            "type": "string"
+          },
+          "endereco": {
+            "type": "object",
+            "properties": {
+              "municiopioId": {
+                "type": "string"
+              },
+              "distrito": {
+                "type": "string"
+              },
+              "bairro": {
+                "type": "string"
+              },
+              "rua": {
+                "type": "string"
+              }
+            }
+          },
+          "contacto": {
+            "type": "object",
+            "properties": {
+              "contacto": {
+                "type": "string"
+              },
+              "tipoContactoId": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "Carro": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "imagemUrl": {
+            "type": "string"
+          },
+          "valorAluguel": {
+            "type": "Number"
+          },
+          "caucao": {
+            "type": "Number"
+          },
+          "fraquia": {
+            "type": "Number"
+          },
+          "empresaId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
