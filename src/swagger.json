@@ -738,6 +738,71 @@
           }
         }
       }
+    },
+    "/tipoContacto": {
+      "post": {
+        "summary": "Cadastro de tipo de contacto",
+        "description": " Essa rota será responsável por cadastrar  tipo de contacto",
+        "tags": ["TipoContacto"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TipoContacto"
+              },
+              "examples": {
+                "tipocontacto": {
+                  "value": {
+                    "descricao": "email"
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/TipoContacto"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar todos os tipos de contactos",
+        "description": "Essa Rota será responsável por listar Todos os tipos de contactos",
+        "tags": ["TipoContacto"],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/TipoContacto"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
