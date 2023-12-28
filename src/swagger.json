@@ -483,6 +483,87 @@
           }
         }
       }
+    },
+    "/agendamento": {
+      "post": {
+        "summary": "Agendar Um carro",
+        "description": " Essa rota será responsável por Agendar Um carro",
+        "tags": ["Agendamento"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Agendamento"
+              },
+              "examples": {
+                "carro": {
+                  "value": {
+                    "clienteId": "4c342105-14cf-40fd-aa7a-702465b8f7f7",
+                    "carroId": "4c342105-14cf-40fd-aa7a-702465b8f7f7",
+                    "dataEntrega": "23-01-2024",
+                    "dataDevolucao": "23-02-2024",
+                    "comprovativoUrl": "images.jpeg",
+                    "nomeAuroporto": "Aeroporto Internacional António Agustinho Neto",
+                    "nAcento": 235
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Agendamento"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agendamento/empresaId": {
+      "get": {
+        "summary": "Listar Agendamento pelo id da Empresa  ",
+        "description": "Essa Rota será responsável por listar agendamento pelo id da Empresa",
+        "tags": ["Agendamento"],
+        "parameters": [
+          {
+            "name": "Id da Empresa",
+            "in": "query",
+            "description": "Id  da empresa à busca",
+            "requered": true
+          }
+        ],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Agendamento"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -586,6 +667,44 @@
           },
           "empresaId": {
             "type": "string"
+          }
+        }
+      },
+      "Agendamento": {
+        "type": "object",
+        "properties": {
+          "clienteId": {
+            "type": "string"
+          },
+          "carroId": {
+            "type": "string"
+          },
+          "dataEntrega": {
+            "type": "date"
+          },
+          "dataDevolucao": {
+            "type": "date"
+          },
+          "comprovativoUrl": {
+            "type": "string"
+          },
+          "nomeAuroporto": {
+            "type": "string"
+          },
+          "nAviao": {
+            "type": "Number"
+          },
+          "nAcento": {
+            "type": "Number"
+          },
+          "motorista": {
+            "type": "Enum"
+          },
+          "nomeHotel": {
+            "type": "string"
+          },
+          "nquarto": {
+            "type": "Number"
           }
         }
       }
