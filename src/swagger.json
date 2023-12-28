@@ -607,6 +607,137 @@
           }
         }
       }
+    },
+    "/municipio": {
+      "post": {
+        "summary": "Cadastro de Município",
+        "description": " Essa rota será responsável por cadastrar  município",
+        "tags": ["Municipio"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Municipio"
+              },
+              "examples": {
+                "municipio": {
+                  "value": {
+                    "nome": "Luanda",
+                    "provinciaId": "4c342105-14cf-40fd-aa7a-702465b8f7f7"
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Municipio"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Todos os Municipios",
+        "description": "Essa Rota será responsável por listar Todos os Municipios",
+        "tags": ["Municipio"],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Municipio"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/provincia": {
+      "post": {
+        "summary": "Cadastro de Provincia",
+        "description": " Essa rota será responsável por cadastrar  Provincia",
+        "tags": ["Provincia"],
+        "requestBody": {
+          "content": {
+            "appplication/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Provincia"
+              },
+              "examples": {
+                "provincia": {
+                  "value": {
+                    "nome": "Luanda"
+                  }
+                }
+              },
+              "responses": {
+                "500": {
+                  "description": "Error of Server"
+                },
+                "400": {
+                  "description": " Field Valodation Error"
+                },
+                "200": {
+                  "description": "Sucessfull",
+                  "content": {
+                    "appplication/json": {
+                      "schema": {
+                        "type": "object",
+                        "$ref": "#/components/schemas/Provincia"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Listar Todas as Provincia",
+        "description": "Essa Rota será responsável por listar Todas as Provincia",
+        "tags": ["Provincia"],
+
+        "responses": {
+          "500": {
+            "description": "Error of Server"
+          },
+
+          "200": {
+            "description": "Sucessfull",
+            "content": {
+              "appplication/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/Provincia"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -758,6 +889,47 @@
             "type": "string"
           },
           "email": {
+            "type": "string"
+          }
+        }
+      },
+      "Municipio": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          },
+          "provinciaId": {
+            "type": "string"
+          }
+        }
+      },
+      "Provincia": {
+        "type": "object",
+        "properties": {
+          "nome": {
+            "type": "string"
+          }
+        }
+      },
+      "TipoContacto": {
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "Reclamacao": {
+        "type": "object",
+        "properties": {
+          "clienteId": {
+            "type": "string"
+          },
+          "titulo": {
+            "type": "string"
+          },
+          "descricao": {
             "type": "string"
           }
         }
